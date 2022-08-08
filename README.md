@@ -145,26 +145,69 @@ echo 'export POOL_ID=${POOL_NAME}.factory.shardnet.near' >> ~/.bashrc
 # login, use your account id to allow near to use your wallet
 near login
 ```
-#### Teminal - login start
+
+> Note: This command launches a web browser allowing for the authorization of a full access key to be copied locally.
+
+1 – Copy the link in your browser
+
 ![img](./images/near_login.jpg)
 
-#### Web - select the created wallet
+
 ![img](./images/near_login_web1.jpg)
 
-#### Web - connect the created wallet
+2 – Grant Access to Near CLI
+
 ![img](./images/near_login_web2.jpg)
 
-#### Web - confirm
+3 – After Grant, you will see a page like this, go back to console
+
 ![img](./images/near_login_web3.jpg)
 
-#### Web - You can ignore this page, browser can be close
+4 - You can ignore this page, browser can be close
+
 ![img](./images/near_login_web4.jpg)
 
-#### Teminal - enter the your ACCOUNT_ID to complete login.
+5 – Enter your wallet (ACCOUNT_ID) and press Enter
+
 ![img](./images/near_login2.jpg)
 
 
-Go back to the terminal and enter the your ACCOUNT_ID to complete login.
+
+#####  Check the validator_key.json
+* Run the following command:
+```
+cat ~/.near/validator_key.json
+```
+
+> Note: If a validator_key.json is not present, follow these steps to create one
+
+Create a `validator_key.json` 
+
+*   Generate the Key file:
+
+```
+near generate-key ${POOL_ID}
+```
+${POOL_ID} ---> xx.factory.shardnet.near WHERE xx is you pool name
+
+* Copy the file generated to shardnet folder:
+Make sure to replace <pool_id> by your accountId
+```
+cp ~/.near-credentials/shardnet/${POOL_ID}.json ~/.near/validator_key.json
+```
+* Edit “account_id” => xx.factory.shardnet.near, where xx is your PoolName
+* Change `private_key` to `secret_key`
+
+> Note: The account_id must match the staking pool contract name or you will not be able to sign blocks.\
+
+File content must be in the following pattern:
+```
+{
+  "account_id": "xx.factory.shardnet.near",
+  "public_key": "ed25519:HeaBJ3xLgvZacQWmEctTeUqyfSU4SDEnEwckWxd92W2G",
+  "secret_key": "ed25519:****"
+}
+```
 
 ```
 # generate validator keys
