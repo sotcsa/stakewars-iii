@@ -125,6 +125,10 @@ cd ~/nearcore
 ./target/release/neard --home ~/.near run
 ```
 
+![img](./images/run_node.png)
+The node is now running you can see log outputs in your console. Your node should be find peers, download headers to 100%, and then download blocks.
+
+
 #### Run neard
 
 ##### Setup an account to be used
