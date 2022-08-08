@@ -190,8 +190,7 @@ near generate-key ${POOL_ID}
 ```
 ${POOL_ID} ---> xx.factory.shardnet.near WHERE xx is you pool name
 
-* Copy the file generated to shardnet folder:
-Make sure to replace <pool_id> by your accountId
+* Copy the file generated to shardnet folder
 ```
 cp ~/.near-credentials/shardnet/${POOL_ID}.json ~/.near/validator_key.json
 ```
@@ -209,39 +208,30 @@ File content must be in the following pattern:
 }
 ```
 
-```
-# generate validator keys
-near generate-key ${pool_name}.factory.shardnet.near
-# copy generated key to its place
-cp ~/.near-credentials/shardnet/${accountId}.shardnet.near.json ~/.near/validator_key.json
-# Change in validator_key.json private_key to secret_key
 
-# Store yuor PUBLIC_KEY as ENV variable
-echo "export PUBLIC_KEY=$(cat .near-credentials/shardnet/sotcsa.shardnet.near.json | jq .public_key)" >> ~/.bashrc
+#####  Start the validator node
 
 ```
-
-
-# Set up service as daemon
-
-```
-# run in a screen manually
 target/release/neard run
+```
+* Setup Systemd
+Command:
 
-# or create a service daemon
+```
 sudo vi /etc/systemd/system/neard.service
 ```
-Paste and replace < userId >
+Paste:
+
 ```
 [Unit]
 Description=NEARd Daemon Service
 
 [Service]
 Type=simple
-User=<userId>
+User=<USER>
 #Group=near
-WorkingDirectory=/home/<userId>/.near
-ExecStart=/home/<userId>/nearcore/target/release/neard run
+WorkingDirectory=/home/<USER>/.near
+ExecStart=/home/<USER>/nearcore/target/release/neard run
 Restart=on-failure
 RestartSec=30
 KillSignal=SIGINT
@@ -252,13 +242,60 @@ KillMode=mixed
 WantedBy=multi-user.target
 ```
 
-```
-sudo systemctl enable neard
-sudo systemctl start neard
-# check log
-sudo journalctl -n 100 -f -u neard | ccze -A
+> Note: Change USER to your paths
+
+Command:
 
 ```
+sudo systemctl enable neard
+```
+Command:
+
+```
+sudo systemctl start neard
+```
+If you need to make a change to service because of an error in the file. It has to be reloaded:
+
+```
+sudo systemctl reload neard
+```
+###### Watch logs
+Command:
+
+```
+journalctl -n 100 -f -u neard
+```
+Make log output in pretty print
+
+Command:
+
+```
+sudo apt install ccze
+```
+View Logs with color
+
+Command:
+
+```
+journalctl -n 100 -f -u neard | ccze -A
+```
+#### Becoming a Validator
+In order to become a validator and enter the validator set, a minimum set of success criteria must be met.
+
+* The node must be fully synced
+* The `validator_key.json` must be in place
+* The contract must be initialized with the public_key in `validator_key.json`
+* The account_id must be set to the staking pool contract id
+* There must be enough delegations to meet the minimum seat price. See the seat price [here](https://explorer.shardnet.near.org/nodes/validators).
+* A proposal must be submitted by pinging the contract
+* Once a proposal is accepted a validator must wait 2-3 epoch to enter the validator set
+* Once in the validator set the validator must produce great than 90% of assigned blocks
+
+Check running status of validator node. If “Validator” is showing up, your pool is selected in the current validators list.
+
+
+---
+
 
 ### Create Staking pool, deposit, ping, check results
 
