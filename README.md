@@ -42,3 +42,33 @@ near validators current
 near validators next
 ```
 
+## Challenge 002
+
+### Setup your node
+#### Server Requirements
+Please see the hardware requirement below:
+
+| Hardware       | Chunk-Only Producer  Specifications                                   |
+| -------------- | ---------------------------------------------------------------       |
+| CPU            | 4-Core CPU with AVX support                                           |
+| RAM            | 8GB DDR4                                                              |
+| Storage        | 500GB SSD                                                             |
+
+### Install 
+```
+# Install developer and buil tools:
+sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm cargo clang build-essential make
+
+# Install Rust & Cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+You will see the following:
+
+![img](./images/rust.png)
+
+Press 1 and press enter.
+##### Source the environment
+```
+source $HOME/.cargo/env
+```
