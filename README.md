@@ -5,7 +5,7 @@
 ### Create a wallet
 https://wallet.shardnet.near.org/
 
-Follow the insttructions
+Follow the instructions
 
 ### Setup NEAR-CLI
 	
@@ -75,7 +75,24 @@ sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev l
 ```
 
 #### Install Rust & Cargo
-Ubuntu allready contains Rust and Cargo 
+Ubuntu should contains Rust and Cargo, if not, please follow next steps
+
+##### Install Rust & Cargo
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+You will see the following:
+
+![img](./images/rust.png)
+
+Press 1 and press enter.
+
+##### Source the environment
+```
+source $HOME/.cargo/env
+```
+
 
 #### Build from Source
 
@@ -95,6 +112,7 @@ git checkout $COMMIT_ID
 cargo build -p neard --release --features shardnet
 ./target/release/neard --home ~/.near init --chain-id shardnet --download-genesis
 
+cd ~/.near
 mv config.json config_renamed_original.json
 wget -O ~/.near/config.json https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
 # genesis file is beside config, download it if needed
@@ -105,15 +123,37 @@ sudo apt-get install awscli -y
 # start it and let it run to synch and catch-up
 cd ~/nearcore
 ./target/release/neard --home ~/.near run
+```
 
+#### Run neard
+
+##### Setup an account to be used
+```
+#Setting IDs (e.g. sotcsa is my account name)
+echo 'export ACCOUNT_NAME=sotcsa' >> ~/.bashrc
+echo 'export ACCOUNT_ID=${ACCOUNT_NAME}.shardnet.near' >> ~/.bashrc >> ~/.bashrc
+echo 'export POOL_NAME=${ACCOUNT_NAME}' >> ~/.bashrc
+echo 'export POOL_ID=${POOL_NAME}.factory.shardnet.near' >> ~/.bashrc
+echo 'export PUBLIC_KEY=' >> ~/.bashrc
+
+```
+
+
+```
 # login, use your account id to allow near to use your wallet
 near login
+
+
+Go back to the terminal and enter the your ACCOUNT_ID to complete login.
+
 # generate validator keys
 near generate-key ${pool_name}.factory.shardnet.near
 # copy generated key to its place
 cp ~/.near-credentials/shardnet/${accountId}.shardnet.near.json ~/.near/validator_key.json
 # Change in validator_key.json private_key to secret_key
 ```
+
+echo
 
 # Set up service as daemon
 
@@ -156,14 +196,6 @@ sudo journalctl -n 100 -f -u neard | ccze -A
 ### Create Staking pool, deposit, ping, check results
 
 ```
-#Setting IDs (e.g. sotcsa is my account name)
-echo 'export ACCOUNT_NAME=sotcsa' >> ~/.bashrc
-echo 'export ACCOUNT_ID=${ACCOUNT_NAME}.shardnet.near' >> ~/.bashrc >> ~/.bashrc
-echo 'export POOL_NAME=${ACCOUNT_NAME}' >> ~/.bashrc
-echo 'export POOL_ID=${POOL_NAME}.factory.shardnet.near' >> ~/.bashrc
-echo 'export PUBLIC_KEY=' >> ~/.bashrc
-
-
 # Create staking pool
 near call factory.shardnet.near create_staking_pool '{"staking_pool_id": "'${POOL_NAME}'", "owner_id": "'${ACCOUNT_ID}'", "stake_public_key": "'${PUBLIC_KEY}'", "reward_fee_fraction": {"numerator": 5, "denominator": 100}, "code_hash":"DD428g9eqLL8fWUxv8QSpVFzyHi1Qd16P8ephYCTmMSZ"}' --accountId="'${ACCOUNT_ID}'" --amount=30 --gas=300000000000000
 
