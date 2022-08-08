@@ -72,11 +72,12 @@ For OS select 'Ubuntu 20.04.3 LTS minimal'
 ```
 # Install developer and buil tools:
 sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm cargo clang build-essential make
+```
 
-# Install Rust & Cargo
+#### Install Rust & Cargo
 Ubuntu allready contains Rust and Cargo 
 
-##### Build form Source
+#### Build from Source
 
 ```
 # Clone from git
