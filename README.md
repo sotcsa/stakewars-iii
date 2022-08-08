@@ -140,12 +140,29 @@ echo 'export POOL_ID=${POOL_NAME}.factory.shardnet.near' >> ~/.bashrc
 ```
 # login, use your account id to allow near to use your wallet
 near login
+```
+#### Teminal - login start
 ![img](./images/near_login.jpg)
+
+#### Web - select the created wallet
+![img](./images/near_login_web1.jpg)
+
+#### Web - connect the created wallet
+![img](./images/near_login_web2.jpg)
+
+#### Web - confirm
+![img](./images/near_login_web3.jpg)
+
+#### Web - You can ignore this page, browser can be close
+![img](./images/near_login_web4.jpg)
+
+#### Teminal - enter the your ACCOUNT_ID to complete login.
 ![img](./images/near_login2.jpg)
 
 
 Go back to the terminal and enter the your ACCOUNT_ID to complete login.
 
+```
 # generate validator keys
 near generate-key ${pool_name}.factory.shardnet.near
 # copy generated key to its place
@@ -157,7 +174,6 @@ echo "export PUBLIC_KEY=$(cat .near-credentials/shardnet/sotcsa.shardnet.near.js
 
 ```
 
-echo
 
 # Set up service as daemon
 
