@@ -54,6 +54,13 @@ Please see the hardware requirement below:
 | RAM            | 8GB DDR4                                                              |
 | Storage        | 500GB SSD                                                             |
 
+### Select a Cloud server
+
+![img](./images/hetzner.jpg)
+No extra cose.
+Estimated cost per month: €40.80
+
+
 ### Install 
 ```
 # Install developer and buil tools:
