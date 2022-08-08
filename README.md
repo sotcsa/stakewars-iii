@@ -134,14 +134,14 @@ echo 'export ACCOUNT_NAME=sotcsa' >> ~/.bashrc
 echo 'export ACCOUNT_ID=${ACCOUNT_NAME}.shardnet.near' >> ~/.bashrc >> ~/.bashrc
 echo 'export POOL_NAME=${ACCOUNT_NAME}' >> ~/.bashrc
 echo 'export POOL_ID=${POOL_NAME}.factory.shardnet.near' >> ~/.bashrc
-echo 'export PUBLIC_KEY=' >> ~/.bashrc
-
 ```
 
 
 ```
 # login, use your account id to allow near to use your wallet
 near login
+![img](./images/near_login.jpg)
+![img](./images/near_login2.jpg)
 
 
 Go back to the terminal and enter the your ACCOUNT_ID to complete login.
@@ -151,6 +151,10 @@ near generate-key ${pool_name}.factory.shardnet.near
 # copy generated key to its place
 cp ~/.near-credentials/shardnet/${accountId}.shardnet.near.json ~/.near/validator_key.json
 # Change in validator_key.json private_key to secret_key
+
+# Store yuor PUBLIC_KEY as ENV variable
+echo "export PUBLIC_KEY=$(cat .near-credentials/shardnet/sotcsa.shardnet.near.json | jq .public_key)" >> ~/.bashrc
+
 ```
 
 echo
