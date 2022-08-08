@@ -296,7 +296,7 @@ Check running status of validator node. If “Validator” is showing up, your p
 
 ---
 
-
+## Challenge 003
 ### Create Staking pool, deposit, ping, check results
 
 ```
