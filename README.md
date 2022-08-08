@@ -56,9 +56,13 @@ Please see the hardware requirement below:
 
 ### Select a Cloud server
 
+Let's use a Dedicated sefrver from Hetzner with NVME SSD
+
 ![img](./images/hetzner.jpg)
-No extra cose.
-Estimated cost per month: €40.80
+
+There is no extra cost.
+
+Estimated cost per month: **€40.80**
 
 
 ### Install 
@@ -75,6 +79,7 @@ You will see the following:
 ![img](./images/rust.png)
 
 Press 1 and press enter.
+
 ##### Source the environment
 ```
 source $HOME/.cargo/env
