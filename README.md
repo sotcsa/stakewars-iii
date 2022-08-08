@@ -15,7 +15,7 @@ sudo apt update && sudo apt upgrade -y
 
 # Install developer tools, Node.js, and npm
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -  
-sudo apt install build-essential nodejs
+sudo apt install build-essential nodejs  -y
 PATH="$PATH"
 
 node -v
@@ -56,13 +56,16 @@ Please see the hardware requirement below:
 
 ### Select a Cloud server
 
-Let's use a Dedicated sefrver from Hetzner with NVME SSD
+Let's use a Dedicated server from Hetzner with NVME SSD
 
 ![img](./images/hetzner.jpg)
 
 There is no extra cost.
 
 Estimated cost per month: **€40.80**
+
+For OS select 'Ubuntu 20.04.3 LTS minimal'
+
 
 
 ### Install 
@@ -71,19 +74,7 @@ Estimated cost per month: **€40.80**
 sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm cargo clang build-essential make
 
 # Install Rust & Cargo
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-You will see the following:
-
-![img](./images/rust.png)
-
-Press 1 and press enter.
-
-##### Source the environment
-```
-source $HOME/.cargo/env
-```
+Ubuntu allready contains Rust and Cargo 
 
 ##### Build form Source
 
@@ -182,7 +173,7 @@ near call ${POOL_ID} deposit_and_stake --amount 460 --accountId ${ACCOUNT_ID} --
 near call ${POOL_ID} get_account_staked_balance '{"account_id": "'${ACCOUNT_ID}'"}'
 
 # Create proposal with ping
-near call ${POOL_ID} ping '{}' --accountId ${ACCOUNT_ID} --gas=300000000000000
+near call ${POOL_ID} ping '{}' --accountId ${ACCOUNT_ID} --gas=300000000000000	
 
 # Check validator is within proposals
 near proposals | grep ${POOL_NAME}
