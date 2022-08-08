@@ -192,6 +192,7 @@ ${POOL_ID} ---> xx.factory.shardnet.near WHERE xx is you pool name
 
 * Copy the file generated to shardnet folder
 ```
+mkdir -p ~/.near/
 cp ~/.near-credentials/shardnet/${POOL_ID}.json ~/.near/validator_key.json
 ```
 * Edit “account_id” => xx.factory.shardnet.near, where xx is your PoolName
