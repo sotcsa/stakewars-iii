@@ -193,7 +193,7 @@ ${POOL_ID} ---> xx.factory.shardnet.near WHERE xx is you pool name
 
 ```
 # Store your PUBLIC_KEY as ENV variable
-echo "export PUBLIC_KEY=$(cat .near-credentials/shardnet/sotcsa.shardnet.near.json | jq .public_key)" >> ~/.bashrc
+echo "export PUBLIC_KEY=$(cat .near-credentials/shardnet/${ACCOUNT_ID}.json | jq .public_key)" >> ~/.bashrc
 ```
 
 * Copy the file generated to shardnet folder
