@@ -1,13 +1,11 @@
 # Stake Wars: Episode III. 
 
-## Challenge 001
-
-### Create a wallet
+## Create a wallet
 https://wallet.shardnet.near.org/
 
 Follow the instructions on the page
 
-### Setup NEAR-CLI
+## Setup NEAR-CLI
 	
 ```
 #Let's make sure the linux machine is up-to-date.
@@ -28,7 +26,7 @@ npm -v
 sudo npm install -g near-cli
 ```
 
-### Validator Stats
+## Validator Stats
 The environment will need to be set each time a new shell is launched to select the correct network.
 
 ```
