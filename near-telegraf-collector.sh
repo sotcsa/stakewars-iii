@@ -39,6 +39,7 @@ echo '{
     "num_expected_chunks": '$(echo $val_result | jq -r .num_expected_chunks)',
     "num_produced_chunks": '$(echo $val_result | jq -r .num_produced_chunks)',
     "num_expected_blocks": '$(echo $val_result | jq -r .num_expected_blocks)',
-    "num_produced_blocks": '$(echo $val_result | jq -r .num_produced_blocks)'
+    "num_produced_blocks": '$(echo $val_result | jq -r .num_produced_blocks)',
+    "current_stake": '$(echo $val_result | jq -r .stake)'
   }
 }'
