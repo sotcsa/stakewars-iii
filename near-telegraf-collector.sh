@@ -17,6 +17,9 @@ COMMIT_ID=$(echo "$VERSION" | cut -d'-' -f3)
 validators=$(curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' $RCP_URL | jq -c '.result')
 val_result=$(echo $validators | jq -c '.current_validators[] | select(.account_id | contains ("'$ACCOUNT_NAME'"))')
 
+stake_raw=$(echo $val_result | jq -r .stake)
+stake=$(echo "$stake_raw / 10^24" | bc)
+
 echo '{
   "measurement": "'$POOLID'",
   "time": '$(date +%s)',
@@ -40,6 +43,6 @@ echo '{
     "num_produced_chunks": '$(echo $val_result | jq -r .num_produced_chunks)',
     "num_expected_blocks": '$(echo $val_result | jq -r .num_expected_blocks)',
     "num_produced_blocks": '$(echo $val_result | jq -r .num_produced_blocks)',
-    "current_stake": '$(echo $val_result | jq -r .stake)'
+    "current_stake": '$stake'
   }
 }'
