@@ -197,3 +197,53 @@ And below are some screenshots from the imported dashboard.
 
 ![img](./images/monitor_grafana10.png)
 
+## Create your own dashboard
+
+You can use a near specific telegraf scripts to send data about your node.
+
+Here is my setup:
+
+* Download this [script](https://github.com/sotcsa/stakewars-iii/blob/main/near-telegraf-collector.sh) (change IP if necessary, see comments in script) to /usr/local/bin/near-telegraf-collector.sh
+* Make it executable (chmod 755 /usr/local/bin/near-telegraf-collector.sh)
+* Configure telegraf 
+
+Add these lines to /etc 
+```
+[[inputs.exec]]
+  commands = [
+     "/usr/local/bin/near-telegraf-collector.sh"
+  ]
+  interval = "60s"
+  timeout = "60s"
+  json_name_key = "measurement"
+  json_time_key = "time"
+  tag_keys = [
+    "validator_name"
+  ]
+
+  json_string_fields = [
+    "near_version",
+    "near_version_commit_id",
+    "hadha_near_version_commit_id",
+    "chain_id",
+    "validator_account_id",
+    "node_key",
+    "hadha_node_key",
+    "fields_syncing",
+    "fields_epoch_id"
+  ]
+
+  json_time_format = "unix"
+```
+
+* Restart telegraf
+```shell
+sudo systemctl restart telegraf
+
+#check status
+sudo systemctl status telegraf
+```
+
+Wait some minutes and you can create a dashboard (see above) with the sent data
+
+![img](./images/monitor_dashboard.jpg)
