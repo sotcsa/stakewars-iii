@@ -6,10 +6,11 @@ set -u
 #   ACCOUNT_NAME (e.g. sotcsa)
 #   POOLID (e.g. sotcsa.factory.shardnet.near)
 
-export LOCAL_RCP_URL=http://127.0.0.1:3030
+# Change the 127.0.0.1 if you are running telegraf not on your near server
+export MY_RCP_URL=http://127.0.0.1:3030
 export RCP_URL=https://rpc.shardnet.near.org
 
-STATUS=$(curl -s  -H 'Content-Type: application/json' $LOCAL_RCP_URL/status | jq)
+STATUS=$(curl -s  -H 'Content-Type: application/json' $MY_RCP_URL/status | jq)
 VERSION=$(echo "$STATUS" | jq -r .version.build)
 COMMIT_ID=$(echo "$VERSION" | cut -d'-' -f3)
 
@@ -38,7 +39,6 @@ echo '{
     "num_expected_chunks": '$(echo $val_result | jq -r .num_expected_chunks)',
     "num_produced_chunks": '$(echo $val_result | jq -r .num_produced_chunks)',
     "num_expected_blocks": '$(echo $val_result | jq -r .num_expected_blocks)',
-    "num_produced_blocks": '$(echo $val_result | jq -r .num_produced_blocks)
+    "num_produced_blocks": '$(echo $val_result | jq -r .num_produced_blocks)'
   }
-
 }'
