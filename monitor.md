@@ -224,11 +224,9 @@ Add these lines to /etc
   json_string_fields = [
     "near_version",
     "near_version_commit_id",
-    "hadha_near_version_commit_id",
     "chain_id",
     "validator_account_id",
     "node_key",
-    "hadha_node_key",
     "fields_syncing",
     "fields_epoch_id"
   ]
